@@ -1,3 +1,6 @@
+<button class="btn btn-secondary" (click)="gotolist()">employee list</button>
+
+
 <h3>Create Employee</h3>
 
 <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
@@ -17,7 +20,7 @@
                 <div *ngIf="f.lastName.errors.required">Last Name is required</div>
             </div>
         </div>
-    
+
 
     <div class="form-group">
         <label>Email</label>
