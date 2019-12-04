@@ -1,7 +1,9 @@
 <button class="btn btn-secondary" (click)="gotolist()">employee list</button>
+<br>
+<br>
+<br>
 
-
-<h3>Create Employee</h3>
+<h3 style="text-align: center;" >Create Employee</h3>
 
 <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
     
@@ -24,17 +26,17 @@
 
     <div class="form-group">
         <label>Email</label>
-        <input type="text" formControlName="email" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.email.errors }" />
-        <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
-            <div *ngIf="f.email.errors.required">Email is required</div>
-            <div *ngIf="f.email.errors.email">Email must be a valid email address</div>
+        <input type="text" formControlName="emailId" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.emailId.errors }" />
+        <div *ngIf="submitted && f.emailId.errors" class="invalid-feedback">
+            <div *ngIf="f.emailId.errors.required">Email is required</div>
+            <div *ngIf="f.emailId.errors.email">Email must be a valid email address</div>
         </div>
     </div>
 
     
    
     <div class="text-center">
-        <button class="btn btn-primary mr-1">Register</button>
+        <button class="btn btn-primary mr-1" type="submit" >Register</button>
         <button class="btn btn-secondary" type="reset" (click)="onReset()">Cancel</button>
     </div>
 </form>

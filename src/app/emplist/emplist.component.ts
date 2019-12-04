@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { EmpserviceService } from '../services/empservice.service';
 
 @Component({
   selector: 'app-emplist',
@@ -7,9 +8,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class EmplistComponent implements OnInit {
 
-  constructor() { }
+  constructor(private apiService:EmpserviceService) { 
+    
+  }
 
   ngOnInit() {
+    console.log("hello");
+    this.apiService.GetEmpList();
   }
 
 }
