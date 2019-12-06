@@ -1,4 +1,5 @@
 import { Component} from '@angular/core';
+import {  Router } from '@angular/router';
 
 
 @Component({
@@ -8,5 +9,11 @@ import { Component} from '@angular/core';
 })
 export class AppComponent {
   title = 'firebase-crud';
+  constructor(private router: Router) {}
+
   
+  ngOnInit() {
+    this.router.navigate([''])
+  }
 }
+

@@ -2,9 +2,10 @@ import { Injectable, ɵConsole } from '@angular/core';
 import { employee } from '../models/employee.model';
 // import { AddComponent } from '../add/add.component';
 
+import { FormBuilder, FormGroup, Validators ,FormControl} from '@angular/forms';
 
 import { AngularFireDatabase, AngularFireList, AngularFireObject, AngularFireDatabaseModule } from '@angular/fire/database';
-import { from, Observable } from 'rxjs';
+import { from } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -12,70 +13,79 @@ import { from, Observable } from 'rxjs';
 
 export class EmpserviceService {
 
-  empRef: AngularFireDatabase;
- 
-  constructor(private db: AngularFireDatabase) {
-    this.empRef = db
-    
-  }
 
+  constructor(private firebase: AngularFireDatabase
+    ,private formBuilder: FormBuilder
+    ){}
+
+
+   empref:AngularFireList<any>;  
 
   
-  /* Create book */
-  AddBook(emp:employee) {
-   let primary =  this.empRef.createPushId()
-    this.empRef.object("emps/"+primary).set({
-      firstName: emp.firstName,
-      lastName: emp.lastName,
-      emailId : emp.emailId,
-    })
-    console.log()
+   updateForm = this.formBuilder.group({
+    $key: [null],
+    firstName: ['', Validators.required],
+    lastName: ['', Validators.required],
+    emailId: ['', [Validators.required, Validators.email]],
+});
+
+
+GetEmpList(){
+     this.empref=this.firebase.list('emps');
+     return this.empref.snapshotChanges();
+   }
+
+AddEmp(emp){
+  this.empref.push({
+          firstName: emp.firstName,
+          lastName: emp.lastName,
+          emailId : emp.emailId,
+  })
+}
+
+DeleteEmp($key:string) {
+  this.empref.remove($key)
   }
+
+editEmp(emp){
   
-  // /* Get book */
-  // GetBook(id: string) {
-  //   this.bookRef = this.db.object('books-list/' + id);
-  //   return this.bookRef;
-  // }  
-
-  /* Get book list */
-  GetEmpList(){
-
-    // this.db.database ("emps").snapshotChanges();
-
-
-    // console.log(this.db.list('emps/'));
-    
-    
+    this.updateForm.reset(emp)
   }
 
-  // // /* Update book */
-  // // UpdateBook(id, book: Book) {
-  // //   this.bookRef.update({
-  // //     book_name: book.book_name,
-  // //     isbn_10: book.isbn_10,
-  // //     author_name: book.author_name,
-  // //     publication_date: book.publication_date,
-  // //     binding_type: book.binding_type,
-  // //     in_stock: book.in_stock,
-  // //     languages: book.languages
-  // //   })
-  // //   .catch(error => {
-  // //     this.errorMgmt(error);
-  // //   })
-  // // }
+updateEmp(emp) {
+   this.empref.update(emp.$key,
+      {
+        firstName: emp.firstName,
+          lastName: emp.lastName,
+          emailId : emp.emailId,
+      })
+  }
 
-  // // /* Delete book */
-  // // DeleteBook(id: string) {
-  // //   this.bookRef = this.db.object('books-list/' + id);
-  // //   this.bookRef.remove()
-  // //   .catch(error => {
-  // //     this.errorMgmt(error);
-  // //   })
-  // // }
 
-  // // // Error management
-  // // private errorMgmt(error) {
-  // //   console.log(error)
-  // // }
+
+// ///////////
+
+// private dbpath='/emps';
+
+//   empRef: AngularFireList<employee>=null;;
+
+//   constructor(private db: AngularFireDatabase) {
+//     this.empRef=db.list(this.dbpath);
+//   }
+//     AddBook(emp:employee) :void{
+//       this.empRef.push(emp)
+//       console.log(emp)
+            
+        
+//     }
+
+//     GetEmpList():AngularFireList<employee> {
+      
+//       return this.empRef;
+//     }
+
+//    ///////////
+
+
+
 }

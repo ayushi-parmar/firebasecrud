@@ -3,9 +3,9 @@
 <br>
 <br>
 
-<h3 style="text-align: center;" >Create Employee</h3>
+<h3 style="text-align: center;" >Update Employee</h3>
 
-<form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+<form [formGroup]="this.apiService.updateForm" (ngSubmit)="onSubmit()">
     
         
         <div class="form-group ">
@@ -36,9 +36,9 @@
     
    
     <div class="text-center">
-        <button  class="btn btn-primary mr-1" type="submit" >Register</button>
-        <button class="btn btn-secondary mr-1" type="reset" (click)="onReset()">Cancel</button>
+      
 
+        <button  class="btn btn-primary mr-1" click="update()" >save</button>
         
     </div>
 </form>

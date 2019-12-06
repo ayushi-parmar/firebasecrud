@@ -16,6 +16,7 @@ export class AddComponent implements OnInit {
   registerForm: FormGroup;
   public submitted=false;
   public employee;
+  public submit=true;
 
 
   constructor(private formBuilder: FormBuilder,private router: Router, private apiService:EmpserviceService) { }
@@ -40,7 +41,7 @@ onSubmit() {
   else{   
     this.employee = new employee(this.registerForm.value.firstName,this.registerForm.value.lastName,this.registerForm.value.emailId)
 
-    this.apiService.AddBook(this.employee)
+    this.apiService.AddEmp(this.employee)
   
 
   alert('SUCCESS!! :-)\n\n' + JSON.stringify(this.registerForm.value, null, 4));
@@ -52,6 +53,7 @@ onSubmit() {
 onReset() {
   this.submitted = false;
   this.registerForm.reset();
+  
 }
 
 gotolist() {

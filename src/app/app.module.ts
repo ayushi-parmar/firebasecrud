@@ -14,6 +14,7 @@ import { AngularFireDatabaseModule } from '@angular/fire/database';
 import { AngularFireStorageModule } from '@angular/fire/storage';
 import { environment } from '../environments/environment';
 import { EmpserviceService } from './services/empservice.service';
+import { UpdateComponent } from './update/update.component';
 
 
 
@@ -22,7 +23,8 @@ import { EmpserviceService } from './services/empservice.service';
     AppComponent,
     AddComponent,
     EmplistComponent,
-    PagenotfoundComponent
+    PagenotfoundComponent,
+    UpdateComponent
     
   ],
   imports: [
